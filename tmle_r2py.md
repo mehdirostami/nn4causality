@@ -202,114 +202,8 @@ tmle_results = ro.r('results <- tmle(Y=y,A=A,W=W)')
 
 
 ```python
-ro.r('results$estimates')[1]
+hasan = ro.r('results$estimates')
 ```
-
-
-
-
-
-    <span>ListVector with 4 elements.</span>
-    <table>
-      <tbody>
-      
-      <tr>
-      <th>
-        psi
-      </th>
-      <td>
-        
-    <span>FloatVector with 1 elements.</span>
-    <table>
-      <tbody>
-      <tr>
-      
-      <td>
-        -0.154321
-      </td>
-      
-      </tr>
-      </tbody>
-    </table>
-    
-      </td>
-      </tr>
-      
-      <tr>
-      <th>
-        var.psi
-      </th>
-      <td>
-        
-    <span>FloatVector with 1 elements.</span>
-    <table>
-      <tbody>
-      <tr>
-      
-      <td>
-        0.016077
-      </td>
-      
-      </tr>
-      </tbody>
-    </table>
-    
-      </td>
-      </tr>
-      
-      <tr>
-      <th>
-        CI
-      </th>
-      <td>
-        
-    <span>FloatVector with 2 elements.</span>
-    <table>
-      <tbody>
-      <tr>
-      
-      <td>
-        -0.402843
-      </td>
-      
-      <td>
-        0.094201
-      </td>
-      
-      </tr>
-      </tbody>
-    </table>
-    
-      </td>
-      </tr>
-      
-      <tr>
-      <th>
-        pvalue
-      </th>
-      <td>
-        
-    <span>FloatVector with 1 elements.</span>
-    <table>
-      <tbody>
-      <tr>
-      
-      <td>
-        0.223576
-      </td>
-      
-      </tr>
-      </tbody>
-    </table>
-    
-      </td>
-      </tr>
-      
-      </tbody>
-    </table>
-    
-
-
 
 
 ```python
@@ -318,13 +212,33 @@ tmle_summary = ro.r('results')
 
 
 ```python
-ro.r('W = dim(c{})'.format(tuple(x_r)))
+TE_tmle = hasan[1][0]
+sd_TE_tmle = hasan[1][1]
+CI_TE_tmle = hasan[1][2]
 ```
 
 
 ```python
-
+print("tmle estimate of TE")
+print(TE_tmle[0])
+print()
+print("stderr of tmle estimate of TE")
+print(np.sqrt(sd_TE_tmle)[0])
+print()
+print("95% confidence interval of tmle estimate of TE")
+print(CI_TE_tmle)
 ```
+
+    tmle estimate of TE
+    -0.1543210194870518
+    
+    stderr of tmle estimate of TE
+    0.1267967253414197
+    
+    95% confidence interval of tmle estimate of TE
+    [1] -0.40284260  0.09420056
+    
+
 
 
 ```python
